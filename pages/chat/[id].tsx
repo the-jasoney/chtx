@@ -1,21 +1,26 @@
 import { GetServerSideProps } from 'next';
-import Head from 'next/head';
+import Message from '../../components/message';
 import prisma from '../../lib/prisma';
-import { NextCompWithTitle } from '../../types/types';
+import { FCWithTitle, NextCompWithTitle } from '../../types/types';
 
-const Server: NextCompWithTitle = () => {
-    return (
-        <>
-            <Head>
-                <title>server</title>
-            </Head>
-        </>
-    )
+type user = {
+    name: string;
+    id?: string;
 }
 
-Server.title = '';
+type message = {
+    author: user;
+    content: string;
+    id?: string;
+}
 
-// @ts-ignore
+type ServerProps = {
+    id: string;
+    name: string;
+    members: user[];
+    messages: message[];
+};
+
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     const server = await prisma.server.findUnique({
         where: {
@@ -29,7 +34,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
             },
             messages: {
                 select: {
-                    content: true
+                    content: true,
+                    author: {
+                        select: {
+                            name: true
+                        }
+                    }
                 }
             }
         }
@@ -39,6 +49,14 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     }
 }
 
-Server
+const Server: FCWithTitle<ServerProps> = ({ id, name, members, messages }) => {
+    return (
+        <>  
+            {messages.map((value) => <Message author={value.author.name} content={value.content} />)}  
+        </>
+    )
+}
+
+Server.title = '';
 
 export default Server

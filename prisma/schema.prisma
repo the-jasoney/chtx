@@ -22,8 +22,7 @@ model user {
   name     String
   lastUsed DateTime
   messages message[]
-  server   server? @relation(fields: [serverId], references: [id])
-  serverId String?
+  server   server[]
 }
 
 model message {

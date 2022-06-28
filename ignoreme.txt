@@ -1,7 +1,0 @@
-Type '({ params }: GetServerSidePropsContext<ParsedUrlQuery, PreviewData>) => Promise<{ props: (server & { members: { name: string; }[]; messages: { ...; }[]; }) | null; }>' is not assignable to type 'GetServerSideProps<{ [key: string]: any; }, ParsedUrlQuery, PreviewData>'.
-  Type 'Promise<{ props: (server & { members: { name: string; }[]; messages: { content: string; }[]; }) | null; }>' is not assignable to type 'Promise<GetServerSidePropsResult<{ [key: string]: any; }>>'.
-    Type '{ props: (server & { members: { name: string; }[]; messages: { content: string; }[]; }) | null; }' is not assignable to type 'GetServerSidePropsResult<{ [key: string]: any; }>'.
-      Type '{ props: (server & { members: { name: string; }[]; messages: { content: string; }[]; }) | null; }' is not assignable to type '{ props: { [key: string]: any; } | Promise<{ [key: string]: any; }>; }'.
-        Types of property 'props' are incompatible.
-          Type '(server & { members: { name: string; }[]; messages: { content: string; }[]; }) | null' is not assignable to type '{ [key: string]: any; } | Promise<{ [key: string]: any; }>'.
-            Type 'null' is not assignable to type '{ [key: string]: any; } | Promise<{ [key: string]: any; }>'.

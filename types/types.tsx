@@ -12,3 +12,7 @@ export type Props = Omit<AppProps, "Component"> & {
 export type NextPageWithTitle = NextPage & {
   title: string;
 }
+
+export type FCWithTitle<T> = React.FC<T> & {
+  title: string
+}
